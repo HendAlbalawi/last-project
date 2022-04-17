@@ -1,0 +1,61 @@
+ # DDL - Create
+create database  store;
+
+use store;
+
+create table countries (code int primary key,name varchar(20) unique ,continent_name varchar(20) not null);
+
+
+create table users(id int primary key,full_name varchar(20)
+,email varchar(20) unique,gender char(1) check(gender='M'or gender='F')
+,deat_of_birth varchar(15),created_at datetime,country_code int 
+, foreign key(id)references countries(id));
+
+
+create table orders(id int primary key,user_id int,
+ status varchar(6)check(status='start' or status='finish'),
+ceated_at datetime);
+
+
+create table order_products(order_id int,products_id int, quantity integer default 0,
+foreign key(order_id)references orders(id),foreign key(products_id)references products(id));
+
+create table products(id int primary key,name varchar(10) not null,price integer default 0
+,status varchar(10) check(status='valid' or status='expired'),created_at datetime);
+
+
+
+# DML - Insert
+insert into countries(code,nam,continent_name)values(1,Lipstick,Middle_east),(2,blash,USA),(3,shadow,Middle_east);
+
+insert into users(id,full_name,email,gender,deat_of_birth,created_at,country_code)values(4,HindAlbalawi,hendgmaill,f,Aug,2-8-1997,1)
+,(5,elhaamDifallh,elhamgmail.com,f,sep,9-12-1992,2),
+(6,manarAlbalawi,manargmail.com,f,oct,5-7-1998,3);
+
+insert into orders(id,user_id,status,ceated_at) values(1,2,33,3-4-1997),(2,44,3,4-5-1993),(3,44,4,5-6-1996);
+
+insert into order_products(order_id,products_id,quantity)values(1,2,3),(4,5,6),(7,8,9);
+
+insert into products(id,name,price,status,created_at)values(1,Hind,5,lipstick,22-5-1990),(2,elhaam,7,shadow,7-12-2004),(6,manar,9,blush,6-12-1996);
+
+
+# DDL - Alter
+alter table countries
+add newprodouct varchar(255);
+
+alter table users 
+add newrow varchar(255);
+
+alter table products  
+add newrowp varchar(255);
+
+alter table order_products   
+add newrowOP varchar(255);
+
+
+# DML - Update
+update countries 
+set name=hanan where code= 3;
+
+# DML - Delete
+delete from products where id =2;
